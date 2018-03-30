@@ -14,6 +14,7 @@ func fetch_and_search(url string) {
 	resp, err := http.Get(url)
 	if err != nil {
 		fmt.Println("error: get content error: url: " + url)
+		return
 	}
 	defer resp.Body.Close()
 	resp_content, err := ioutil.ReadAll(resp.Body)
