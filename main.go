@@ -35,7 +35,7 @@ func fetch_and_search(url string) {
 		tmp_substr2 := resp_content_str[pos_begin : len(resp_content_str)-1]
 		pos_end := strings.Index(tmp_substr2, "\"")
 		ans := resp_content_str[pos_begin : pos_begin+pos_end]
-		if !strings.HasPrefix(ans, "https://") { //exclude some annoying link
+		if !strings.HasPrefix(ans, "https://") && !strings.HasPrefix(ans, "/") { //exclude some annoying link
 			fmt.Println("ans: " + ans)
 			tmp_pos := strings.Index(ans, "?")
 			filename := ans[:tmp_pos]
@@ -46,7 +46,7 @@ func fetch_and_search(url string) {
 				fmt.Println("log: filename map added: " + filename)
 				modify_and_save(resp_content_str, filename)
 
-				go fetch_and_search("https://docs.microsoft.com/en-us/dotnet/api/" + filename)
+				fetch_and_search("https://docs.microsoft.com/en-us/dotnet/api/" + filename)
 
 			} else {
 				fmt.Println("log: filename map exist: " + filename)
