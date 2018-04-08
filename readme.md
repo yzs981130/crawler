@@ -20,6 +20,10 @@ Golang environment is required. If you have Go 1.4 or later, simply use `go run`
 
 Then use [dashing](https://github.com/technosophos/dashing) to build the docset. Full documentation of dashing can be seen from its [Github repo](https://github.com/technosophos/dashing/blob/master/README.md). We can only concentrate on the `dashing.json`. We need to enable external JS by modifying `AllowJS` entry in `Info.plist` in the docset. You get more information in [enableJavascript](https://kapeli.com/docsets#enableJavascript). Or simply use my own version of [dashing](https://github.com/yzs981130/dashing).
 
+# Attention
+
+Avoid running it in `$HOME` or other important folder. In case, use `rm *.html` to clean up.
+
 
 # Performance problem
 Because MS docs website will block connection when too frequently, so I only use one single thread to get all the HTML files. It's expected to finish in hours when there's a pool Internet connection.
