@@ -10,15 +10,38 @@ When we get all Microsoft docs HTML files in a flat file structure, we can simpl
 
 # Dependencies
 
-[simplejson](github.com/bitly/go-simplejson)
+## [simplejson](https://github.com/bitly/go-simplejson)
 
 Use `go get -u github.com/bitly/go-simplejson` to get go-simplejson in your local GOROOT dir.
+
+## [goquery](https://github.com/PuerkitoBio/goquery)
+
+Use `go get -u github.com/PuerkitoBio/goquery` to get go-simplejson in your local GOROOT dir.
 
 # Usage
 
 Golang environment is required. If you have Go 1.4 or later, simply use `go run` to start the download process. When finished, you'll see many HTML files in the same directory with `main.go`.
 
 Then use [dashing](https://github.com/technosophos/dashing) to build the docset. Full documentation of dashing can be seen from its [Github repo](https://github.com/technosophos/dashing/blob/master/README.md). We can only concentrate on the `dashing.json`. We need to enable external JS by modifying `AllowJS` entry in `Info.plist` in the docset. You get more information in [enableJavascript](https://kapeli.com/docsets#enableJavascript). Or simply use my own version of [dashing](https://github.com/yzs981130/dashing).
+
+Or you can simply follow the step-by-step procedure:
+
+
+```bash
+
+$ go get -u github.com/yzs981130/dashing
+$ go get -u github.com/PuerkitoBio/goquery
+$ go get -u github.com/bitly/go-simplejson
+
+$ wget https://raw.githubusercontent.com/yzs981130/crawler/master/main.go
+$ mkdir tmp && mv main.go tmp/ && cd tmp
+
+$ go run main.go
+
+$ dashing create
+$ dashing build
+
+```
 
 # Attention
 

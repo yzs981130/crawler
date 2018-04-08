@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	simplejson "github.com/bitly/go-simplejson"
+	"github.com/PuerkitoBio/goquery"
+	"github.com/bitly/go-simplejson"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -65,8 +66,22 @@ func modify_and_save(content string, name string) {
 	content = strings.Replace(content, "?view=azure-dotnet", ".html", -1) // link structure
 	content = strings.Replace(content, m_str1, m_str2, -1)                // js relative link correction
 	content = strings.Replace(content, m_str3, m_str4, -1)                // css relative link correction
+
+	r := strings.NewReader(content)
+	g, err := goquery.NewDocumentFromReader(r)
+	if err != nil {
+		fmt.Println("error: delete html node error")
+	}
+	g.Find("div.header-holder").Remove()
+	g.Find("div.sidebar").Remove()
+	g.Find("footer#footer").Remove()
+	content, err = g.Html()
+	if err != nil {
+		fmt.Println("error: convert html node to string")
+	}
+
 	tmp := []byte(content)
-	err := ioutil.WriteFile(name+".html", tmp, 777)
+	err = ioutil.WriteFile(name+".html", tmp, 777)
 	if err != nil {
 		fmt.Println("error: save file error. filename: " + name)
 	}
