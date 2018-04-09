@@ -43,6 +43,11 @@ $ dashing build
 
 ```
 
+
+# Screenshot
+
+![screenshot.png](https://i.loli.net/2018/04/09/5acabd41821e2.png)
+
 # Attention
 
 Avoid running it in `$HOME` or other important folder. In case, use `rm *.html` to clean up.
